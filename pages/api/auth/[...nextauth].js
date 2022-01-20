@@ -11,6 +11,7 @@ export default NextAuth({
       //   "https://accounts.google.com/o/oauth2/v2/auth?prompt=consent&access_type=offline&response_type=code",
       authorization: {
         params: {
+          redirect_uri: "https://facebook-clone-sable.vercel.app",
           prompt: "consent",
           access_type: "offline",
           response_type: "code",
