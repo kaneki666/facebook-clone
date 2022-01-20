@@ -8,12 +8,10 @@ import Feed from "../components/Feed";
 import Widgets from "../components/Widgets";
 import { db } from "../firebase";
 
-
 export default function Home() {
-  const { data: session,status} = useSession();
+  const { data: session, status } = useSession();
 
   if (status === "authenticated") {
-    console.log(session.user.email);
     return (
       <div className="h-screen bg-gray-100 overflow-hidden">
         <Head>
@@ -21,13 +19,11 @@ export default function Home() {
         </Head>
         {/* header */}
         <Header></Header>
-        
+
         <main className="flex">
           <Sidebar />
-          <Feed/> 
-          <Widgets/>
-    
-
+          <Feed />
+          <Widgets />
         </main>
       </div>
     );
@@ -42,7 +38,7 @@ export async function getServerSideProps(context) {
 
   // prefetching data from firebase
   const posts = await db.collection("posts").orderBy("timestamp", "desc").get();
-console.log(posts)
+  console.log(posts);
   const docs = posts.docs.map((post) => ({
     id: post.id,
     ...post.data(),
@@ -57,7 +53,6 @@ console.log(posts)
   //           console.log(doc.id, " => ", doc.data());
   //       });
   //   })
-
 
   return {
     props: {
